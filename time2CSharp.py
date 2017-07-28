@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     with stdoutIO() as s:
         try:
-            print(subprocess.check_output(["dotnet", "%sbin/Debug/netcoreapp1.1/tmp.dll" % tmpfold]).decode("utf-8"))
+            print(subprocess.check_output(["dotnet", "%s/bin/Debug/netcoreapp1.1/tmp.dll" % tmpfold]).decode("utf-8"))
         except BaseException as e:
             print(e)
     print(s.getvalue())
