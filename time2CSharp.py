@@ -2,6 +2,7 @@ import sys
 import os
 from io import StringIO
 import contextlib
+import subprocess
 
 
 @contextlib.contextmanager
@@ -26,12 +27,15 @@ if __name__ == "__main__":
     tmpfold = os.environ["TMPDIR"]
     tmpfile = "%s%s" % (tmpfold, "Program.cs")
     f = open(tmpfile, 'w')
-    print(st, file=f)
+    f.write(st)
     f.close()
-    os.execlp("dotnet", "", "build")
+    os.chdir(tmpfold)
+    p1 = subprocess.Popen(["dotnet", "build"], stdout=subprocess.PIPE)
+    pLog = p1.stdout.read()
+
     with stdoutIO() as s:
         try:
-            os.execlp("dotnet", "", "/tmp/bin/Debug/netcoreapp1.1/tmp.dll")
+            print(subprocess.check_output(["dotnet", "%sbin/Debug/netcoreapp1.1/tmp.dll" % tmpfold]).decode("utf-8"))
         except BaseException as e:
             print(e)
     print(s.getvalue())
