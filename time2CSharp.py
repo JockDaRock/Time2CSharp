@@ -25,7 +25,7 @@ def get_stdin():
 if __name__ == "__main__":
     st = get_stdin()
     tmpfold = os.environ["TMPDIR"]
-    tmpfile = "%s%s" % (tmpfold, "Program.cs")
+    tmpfile = "%s/%s" % (tmpfold, "Program.cs")
     f = open(tmpfile, 'w')
     f.write(st)
     f.close()
