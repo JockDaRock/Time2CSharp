@@ -31,7 +31,7 @@ if __name__ == "__main__":
     os.execlp("dotnet", "", "build")
     with stdoutIO() as s:
         try:
-            os.execlp("dotnet", "", "run")
+            os.execlp("dotnet", "", "/tmp/bin/Debug/netcoreapp1.1/tmp.dll")
         except BaseException as e:
             print(e)
     print(s.getvalue())
